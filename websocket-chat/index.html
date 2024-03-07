@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket-Chat</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+      }
+      input {
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form onsubmit="handleSubmit(event)">
+        <input type="text" name="" id="msg" />
+        <input type="submit" value="send message" />
+      </form>
+    </div>
+  </body>
+  <script>
+    let message = [];
+    const ws = new WebSocket("ws://localhost:8080");
+    const inputValue = document.getElementById("msg");
+    function handleSubmit(e) {
+      e.preventDefault();
+    }
+  </script>
+</html>
