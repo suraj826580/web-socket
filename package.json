@@ -1,16 +1,16 @@
 {
   "name": "web-socket",
   "version": "1.0.0",
+  "type": "module",
+  "module": "index.js",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.1.0",
     "ws": "^8.16.0"
   }
 }
