@@ -27,9 +27,12 @@
   <script>
     let message = [];
     const ws = new WebSocket("ws://localhost:8080");
-    const inputValue = document.getElementById("msg");
     function handleSubmit(e) {
+      const inputValue = document.getElementById("msg").value;
       e.preventDefault();
+      const data = { inputValue };
+      ws.send(JSON.stringify(data));
+      // console.log(inputValue);
     }
   </script>
 </html>
