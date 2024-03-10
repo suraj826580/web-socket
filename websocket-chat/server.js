@@ -3,15 +3,12 @@ const { WebSocketServer } = require("ws");
 const wss = new WebSocketServer({ port: 8080 });
 
 wss.on("connection", (socket) => {
-  console.log("Got a New Connection");
+  console.log("got a new connection");
   socket.on("message", (message) => {
-    // console.log(wss.clients);
-    // console.log(JSON.parse(message));
-
-    wss.clients.forEach((clients) => {
-      console.log(clients.readyState);
+    wss.clients.forEach((client) => {
+      if (client !== socket && client.readyState) {
+        client.send(JSON.stringify(message));
+      }
     });
   });
 });
-
-// today commit

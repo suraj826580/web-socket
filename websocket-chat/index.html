@@ -22,17 +22,27 @@
         <input type="text" name="" id="msg" />
         <input type="submit" value="send message" />
       </form>
+      <div id="messageDisplay"></div>
     </div>
   </body>
   <script>
-    let message = [];
     const ws = new WebSocket("ws://localhost:8080");
+
     function handleSubmit(e) {
-      const inputValue = document.getElementById("msg").value;
       e.preventDefault();
-      const data = { inputValue };
+      const inputValue = document.getElementById("msg").value;
+      const data = { name: "Socket", message: inputValue };
       ws.send(JSON.stringify(data));
-      // console.log(inputValue);
+      document.getElementById("msg").value = ""; // Clear input field after sending message
     }
+
+    ws.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      const byteArray = new Uint8Array(data.data);
+      const decoder = new TextDecoder("utf-8");
+      const decodedString = JSON.parse(decoder.decode(byteArray));
+      const messageDisplay = document.getElementById("messageDisplay");
+      messageDisplay.innerHTML += `<p><strong>${decodedString.name}:</strong> ${decodedString.message}</p>`;
+    };
   </script>
 </html>
